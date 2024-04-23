@@ -1,1 +1,44 @@
-<h1>hello World</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <title>Gee3 - Welcome</title>
+</head>
+<body>
+    <div class="under-construction">
+	<h1>Gee3.co.uk</h1>
+		🛠
+        <h2>Development / Test Domain</h2>
+        <p>When we're working on something awesome, you might catch it here. 💫</p>
+        <p>✉ <a href="mailto:support@gee3.co.uk">Enquiries </a></p>
+    </div>
+<script>
+function changecol() {
+  const elements = document.getElementsByClassName("under-construction");
+  const colors = [
+    "red", "orange", "yellow", "green", "blue", "indigo", "violet"
+  ];
+
+  let currentIndex = 0;
+
+  function updateShadow() {
+    for (const element of elements) {
+      element.style.transition = "box-shadow 0.9s ease"; // Add a smooth transition
+      element.style.boxShadow = `0 0 10px ${colors[currentIndex]}`;
+    }
+  }
+
+  setInterval(() => {
+    currentIndex = (currentIndex + 1) % colors.length;
+    updateShadow();
+  }, 1000); // Change color every second
+}
+
+// Call the function when the page loads
+window.addEventListener("load", changecol);
+
+</script>
+</body>
+</html>
