@@ -83,10 +83,11 @@
             const password = document.getElementById("password").value;
     
             const formData = {
-                name:email,
+                name:'test mc test',
+                email,
                 password
             };
-    
+            
             fetch("https://dev-gibbons-law-client-0569094608b5.herokuapp.com/auth/register", {
     method: "POST",
     headers: {
