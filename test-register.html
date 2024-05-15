@@ -81,12 +81,14 @@
     
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
-            const name = 'milo paws'
+            const name = 'milo paws';
+            const recipientNumber = '+447780000000';
     
             const formData = {
                 name,
                 email,
-                password
+                password,
+                recipientNumber
             };
             
             fetch("https://dev-gibbons-law-client-0569094608b5.herokuapp.com/auth/register", {
