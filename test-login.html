@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #0074cc;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0055a5;
+        }
+
+        p {
+            margin-top: 10px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>Login Form</h1>
+        <form id="loginForm">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p id="message"></p>
+        <a href="./testRegister.html">Not a Member? Register Now</a>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const messageElement = document.getElementById("message");
+
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const formData = {
+                email,
+                password
+            };
+
+            fetch("https://dev-gibbons-law-client-0569094608b5.herokuapp.com/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => {
+                    if (response.status === 200) {
+                        alert("Success");
+                        return response.json(); // Return the parsed JSON data
+                    } else {
+                        alert("Invalid Login");
+                        throw new Error("Invalid Login"); // Throw an error to trigger the catch block
+                    }
+                })
+                .then(data => {
+                    sessionStorage.setItem('access_token', data.accessToken);
+                    sessionStorage.setItem('refresh_token', data.refreshToken);
+                    messageElement.textContent = data.message;
+                })
+                .catch(error => {
+                    alert("An error occurred.");
+                    console.error(error);
+                });
+
+        });
+     
+
+
+    </script>
+</body>
+
+</html>
